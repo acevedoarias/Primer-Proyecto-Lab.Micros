@@ -1,0 +1,69 @@
+INSTITUTO TECNOLOGICO DE COSTA RICA
+ESCUELA DE INGENIERIA ELECTRONICA
+
+LABORATORIO DE ESTRUCTURA DE MICROPROCESADORES
+I SEMESTRE 2017
+
+EMULADOR EN ESAMBLADOR x86 PARA UNA ARQUITETURA MIPS DE 32 BITS
+
+INTEGRANTES:
+
+JAVIER ACEVEDO ARIAS 2013113174
+RONALD MIRANDA ARCE 2013025663
+JULIO ZAMORA MADRIGAL 2014081688
+RICARDO VARGAS ARCE 201233414
+
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////////////////////////////
+
+Descripción del diseño de software realizado en el proyecto
+
+	En primera instancia, se crearon los espacios de memoria reservados para el banco de registros, para la memoria de datos y para el stack. Posteriormente, se creo una etapa donde se lee bit por bit, lo que se encuentra en la memoria de datos para obtener la instruccion que se va a ejecutar, ademas se realiza el PC+4 (Etapa de IF).
+	Luego se implementa un decodificador en donde se divide cada instruccion en Opcode, Rs, Rt, Rd, Shamnt, Function, Immediate y Address, esto para ejecutar una determinada instrucción (Etapa de ID), además, llama al método o unidad que ejecuta. Este método se implemento basandose en la arquitectura MIPS (Etapa de EX).
+	Debido a que se programa en x86 sobre Linux, se puede guardar y recuperar datos en memoria en cada rutina que simula cada instruccion (Etapas de Mem y WB).
+	Se implementaron macros para imprimir en consola y crear un archivo de texto, en el cual se contiene absolutamente todos los detalles de la ejecución que se han impreso en consola, en los cuales se pasaron de valores binarios a codigo ASCII, por medio de algunas funciones de la arquitectura x86 (Syscall).
+	En el Software se diseñaron diferentes metodos para detectar si la ROM se encuentra en el mismo directorio, en el cual se muestra si se encontró o no, así mismo se implementó un detector de "Enter" para continuar con la ejecución o finalización del programa.
+	Tambien se diseño una etapa donde, por medio del comando cpuid se obtuvieron los datos del modelo, el rendimiento del CPU, la familia y el tipo de microprocesador del sistema donde se ejecuta el programa, para luego guardar la informacion en registros y cargarlos en espacios de memoria reservados.
+
+¿Cuáles fueron los principales retos a resolver y como se resolvieron?
+
+	La lectura del archivo de texto donde se encuentran las instrucciones que se van a ejecutar
+	Solución: se reservo un espacio de memoria de 4950 bytes, luego se cargo el contenido del archivo .txt en ese espacio y se comparó caracter por caracter con un "1" logico. Para recorrer el texto, al puntero del texto se le suma "1". 
+	La simulación del PC
+	Solución: se creo un espacio de memoria reservado el cual se recorria sumandole un offset de 8.
+	Llamar al sistema para consultar el rendimiento del CPU en medio de la ejecución del programa.
+	Solución: se carga un valor en el registro Eax, luego se pone la instruccion cpuid, lo cual carga los valores en los registros eax, ebx, ecx y edx, posteriormente se carga el valor en un espacio de memoria reservado. 
+
+¿Cuáles mejoras se sugieren para el programa y como se harían?
+
+	Mediante un archivo makefile se podria eliminar la necesidad de estar ingresando manualmente las intrucciones para poder compilar, ejecutar y debuguear el codigo.
+	Crea nuevas instrucciones  que sean mas flexibles para que el emulador pueda compilar diferentes codigos, por ejemplo una instruccion para dividir.
+	Eliminar el número innesesario de lineas, por medio de uso de macros, para asi mejorar el uso del CPU y el rendimiento.
+	Una mejora puede ser crear un algoritmo que le permita al programa ejecutarse con "n" cantidad de argumentos. se podria solucionar utilizando el frame pointer.
+
+¿Cuáles son las conclusiones a las que llega el grupo de trabajo?
+
+•	Cumplir con los avances semanales para impedir acumulación de trabajo.
+•	Programar en ensamblador x86 puede reducir el número de líneas de código con respecto a MIPS.
+•	Utilizar los registros de 64 bits facilita el procesamiento de las rutinas para las instrucciones unsigned.
+•	Es más eficiente reservar un solo espacio en memoria que construir la memoria línea por línea.
+•	El uso de macros facilita la comprensión, mantener un orden y la generación de código.
+•	Entre más líneas de código tenga el programa, disminuye el rendimiento del CPU.
+
+¿Qué herramientas se usaron para completar el proyecto?
+
+•	Ubuntu (plataforma de Linux)
+•	El editor de texto (gedit y nano)
+•	El compilador (Nasm)
+•	El debuguer (GDB)
+•	La nube mediante gitpush
+•	Tutoriales de youtube
+•	Manual de apoyo asociado al proyecto
+•	Manual de Estructura de computadores
+
+Referencias bibliograficas
+
+	Kupala. (2016). You Tube. Obtenido de https://www.youtube.com/watch?v=AwmhZUATGYM
+	D. Patterson & J. Hennessy: Computer Architecture: A quantitative
+	approach. Morgan Koufman. 5 Ed., 2011.
+	Duntemann, J. (2011). Assembly language step-by-step: Programming with Linux. John Wiley & Sons.
+

@@ -1,0 +1,87 @@
+INSTITUTO TECNOLOGICO DE COSTA RICA
+ESCUELA DE INGENIERIA ELECTRONICA
+
+LABORATORIO DE ESTRUCTURA DE MICROPROCESADORES
+I SEMESTRE 2017
+
+EMULADOR EN ESAMBLADOR x86 PARA UNA ARQUITETURA MIPS DE 32 BITS
+
+INTEGRANTES:
+
+JAVIER ACEVEDO ARIAS 2013113174
+RONALD MIRANDA ARCE 2013025663
+RICARDO VARGAS ARCE 201233414
+JULIO ZAMORA MADRIGAL 2014081688
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\//////////////////////////////////////////////////////////////
+
+Bitácora
+
+Semana 1:
+
+	En la primera semana se inició con la instalación de Linux por medio de una máquina virtual y además, 
+	la instalación de las herramientas requeridas para trabajar en el proyecto como el editor de texto (gedit y nano), 
+	el compilador (Nasm) y el debuguer (GDB). 
+	Luego se procedió a realizar el manual de apoyo asociado al instructivo del proyecto para familiarizarse con el funcionamiento de las herramientas como el GDB y 
+	también para crear la pantalla de inicio del programa con su respectiva bienvenida e información del curso.
+
+Semana 2:
+
+	En la segunda semana se inició con la investigación de cómo crear un repositorio en github mediante el comando gitpush
+	y se logró utilizar el comando de la forma correcta. Luego se procedió a traducir el código dado por el profesor a 
+	lenguaje de máquina para crear el archivo ROM.txt y cargarlo a un espacio de memoria reservado, la memoria de texto.
+	Luego de cargar el archivo de texto, se realizó la lectura de los char de cada línea y se tradujeron a bits para poder
+	decodificar la instrucción. Se inició la investigación del funcionamiento de los argumentos.
+
+
+Semana 3:
+	
+	En la tercera semana, se inició con la creación de la memoria de datos, donde únicamente lo que se hizo fue declarar un
+	espacio reservado en memoria y luego simular el PC recorriendo ese espacio de memoria sumándole un offset de 8 para avanzar
+	entre espacios de 64 bits. Luego se procedió con la creación de las rutinas encargadas de simular el comportamiento de las
+	instrucciones de la arquitectura MIPS, como el add, addi, addu, and, andi, beq, bne, j, jal, jr, lw, sw, nor, or, ori, slt,
+	slti, sltiu, sltu, sll, srl, sub, subu y mult.
+	También se continuo con la investigación del funcionamiento de los argumentos y como ejecutar el programa utilizándolos.
+
+
+Semana 4:
+	Se continúo con la investigación del funcionamiento de los argumentos, 
+	se le consultó al profesor sobre el mismo debido a que estaba generando grandes problemas su elaboración.
+	Al haberse logrado crear el add y algunas instrucciones del tipo R se empezaron a analizar y 
+	crear las demás pensando en cuales nos iban a generar más problemas, 
+	se logró avanzar a las tipo I con solo el inconveniente de que faltaba el JR.
+	En la I debido a problemas con el signo y 
+	el reconocimiento del mismo se tuvieron muchos problemas donde el día de la revisión semanal se le consultó al profesor por el mismo, 
+	dándonos varias ideas que contribuyeron a su arreglo.
+	Una de las ideas fue al nosotros trabajar con registros de 32 y 
+	necesitar hacer una instrucción tipo unsigned,
+	caso que en las R había que arreglar se le podía hacer a nuestro registro de 32 bits una suma a un registro de 64 bits que contenga puros ceros para que a la hora de hacer la detección del signo el bit más significativo iba a tener un cero sin importar el valor de nuestro bit más significativo cuando el registro era de 32 bits, 
+	lo que nos funcionaba como un tipo de corrimiento a la izquierda o derecha dependiendo del caso.
+
+
+Semana 5:
+	Está semana se trabajó durante la mayoría de días incluyendo el fin de semana, se lleva acabo las instrucciones tipo J y algunas tipo I que no se habían hecho,
+	con el error de que para la mayoría de las instrucciones no se contemplaron el máximo de casos posibles a realizar por lo que se debían mantener realizando constantes 
+	cambios en cada una de ellas lo que cual era bastante tedioso.
+	Gracias al video de Kupala x86_64 Linux Assembly #8 - Subroutine to Print Integers (https://www.youtube.com/watch?v=XuUD0WQ9kaE) se pudo comenzar con la impresión 
+	en pantalla de los valores de los registros resultantes, simplificando el hecho de tener que utilizar siempre el debug para saber si el resultado era correcto.
+	También mediante una exhaustiva noche de trabajo se logró sacar la función de los argumentos los cuales nos permitían trabajar en el código con valores asignados por nosotros mismos desde la terminal.
+
+Semana 6:
+
+	Está semana continuamos con la creación de la instrucciones, dandole revisión y reparación de los respectivos bugs y casos que se presentaban en cada una de las que ya estaban hechas,
+	donde se pudo observar que habían varios errores en las tipos I en los resultados finales y al momento de generar la impresión en pantalla. 
+	Otro compañero se encargaba de continuar con la generación del código que producía la impresión en pantalla el cual fue increíblemente extenso haciendo que el código llegara a superar 
+	las 10 mil líneas debido a que se realizó a pie para cada tipo de instrucción.
+	El otro compañero estaba generando el código que iba creando el archivo de texto, el cual brindo varios problemas como que a la hora de que se creaba nos escribía en otro idioma, 
+	el cual exitosamente se pudo solventar.
+
+Semana 7:
+
+	Se extendió la entrega del proyecto una semana más quedando la entrega final para el día 23 de marzo del 2017 donde se entregaría el proyecto en conjunto de trabajos escritos que llevan.
+	El día lunes se trabajó en corregir los bugs presentes en instrucciones tales como el  store Word, load Word, jump register, además a los tipos R se les contemplo la idea de que pudieran tener un registro con valor negativo y se les agrego a los que no eran unsigned.
+	Se logró consultar información del sistema cargando un valor en un registro y luego cargándolo a un espacio de memoria reservado, y de esta manera poder compilar el programa mediante LD sin ningún problema.
+	A partir del miércoles se trabajo en:
+	También se continuó con la finalización de la creación del archivo de texto donde se terminó de añadir el código que lo generaba y se verifico que el resultado fuera congruente con lo esperado. Se finalizó el informe, la bitácora y el manual de uso.
+	A partir del día martes se comenzó con la unión de código la cual genero bastantes fallos debido a pérdidas de valores en los registros gracias a la falta de protección en el momento de la utilización de los registros generales, lo cual gracias a búsquedas intensivas y constante revisión se logró arreglar.
+	Se inició también con la creación del código que genere el msj que muestra la identificación del fabricante del microprocesador, el modelo, la familia y el tipo de microprocesador del sistema donde se ejecuta el programas, además de un mostrar en un mensaje el porcentaje de utilización del microprocesador.
+ 

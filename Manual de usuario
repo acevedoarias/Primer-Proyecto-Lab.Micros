@@ -1,0 +1,21 @@
+------------------------------MANUAL DE USUARIO--------------------------------------
+
+1. Lo primero que se debe hacer es compilar el documento mediante el comando
+nasm -f elf64 -o MIPS.o MIPS.asm
+2. Luego crear el ejecutable con el comando ld -o MIPS MIPS.o
+3. Seguido de eso se procede a ejecutar el programa con ./MIPS arg0 arg1 arg2 arg3.
+Donde arg0, arg1, arg2, arg3 son digitos en decimal ingresados por el usuario,
+los cuales permiten la ejecución del programa adecuadamente.
+4. El programa le desplegara información, muestra si se encontró el archivo ROM(este archivo 
+debe estar en la misma carpeta que el ejecutable donde está el código que se ejecutará y este 
+esperará a que se presione la tecla ENTER para proceder con la ejecución del mismo.
+5. Se mostrarán todas las instrucciones que se ejecutan como el resultado de la misma, 
+además de los valores de algunos registros.
+6. Al finalizar el programa mostrara un mensaje de que la ejecución fue existosa, o si 
+no lo fue en caso de que fallara.
+7. Además mostrará el nombre de cada uno de los integrantes que realizaron el emulador 
+MIPS.
+8. Mostrará los datos del CPU, terminará esperando que el usuario teclee ENTER para 
+finalizar.
+9. Al finalizar se crea un archivo donde se mostrará toda la información detallada de la 
+ejecución.
